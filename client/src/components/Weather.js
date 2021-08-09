@@ -7,17 +7,17 @@ const Weather = () => {
     location: "",
   });
 
-  const fetchWeather = async (location) => {
-    const res = await fetch(`/weather/${location}`);
+  const fetchWeather = async () => {
+    const res = await fetch(`/weather/${weather.location}`);
     console.log(res);
     const data = await res.json();
     console.log(data);
     setWeatherInfo(data);
   };
 
-  useEffect(() => {
-    fetchWeather();
-  }, []);
+  // useEffect(() => {
+  //   fetchWeather();
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +30,8 @@ const Weather = () => {
     });
   };
 
-  const handleSubmit = (location) => {
-    axios.post("/weather");
+  const handleSubmit = () => {
+    fetchWeather();
   };
 
   return (
@@ -46,6 +46,7 @@ const Weather = () => {
           onChange={handleChange}
         />
         <button
+          type="button"
           onClick={() => {
             handleSubmit(weather.location);
           }}
